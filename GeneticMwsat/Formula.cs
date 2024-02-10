@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GeneticMwsat;
@@ -7,7 +6,8 @@ public class Formula
 {
     private readonly List<Clause> _clauses = new();
     public int VariableCount { get; set; }
-    public int ClauseCount { private get; set; }
+    public int ClauseCount { get; set; }
+    public int[] Weights { get; set; } = Array.Empty<int>();
 
     public void AddClause(Clause clause)
     {

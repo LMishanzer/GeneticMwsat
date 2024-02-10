@@ -1,11 +1,12 @@
-using System;
-
 namespace GeneticMwsat;
 
 public struct Chromosome
 {
     public bool[] Genes { get; }
     public int Fitness { get; set; }
+    public int SecondaryFitness { get; set; }
+    public int Rating => Fitness + SecondaryFitness;
+
     public bool FormulaSatisfied { get; set; }
 
     public Chromosome(bool[] genes)
@@ -56,15 +57,23 @@ public struct Chromosome
         }
     }
 
-    public int GetPositivesCount()
+    public int GetFitness(int[] weights)
     {
-        int positives = 0;
+        int fitness = 0;
         for (int i = 0; i < Genes.Length; i++)
         {
             if (Genes[i])
-                positives++;
+                fitness += weights[i];
         }
 
-        return positives;
+        return fitness;
     }
+
+    // public bool BetterThan(Chromosome other)
+    // {
+    //     if (Fitness > other.Fitness)
+    //         return true;
+    //
+    //     return !FormulaSatisfied && !other.FormulaSatisfied && SecondaryFitness > other.SecondaryFitness;
+    // }
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace GeneticMwsat;
 
 public struct Instance
@@ -13,7 +11,7 @@ public struct Instance
 
     public bool GetVariableValue(int index)
     {
-        if (index <= 0 && index > _variables.Length)
+        if (index <= 0 || index > _variables.Length)
             throw new ArgumentOutOfRangeException("index", "Index is out of range.");
         
         return _variables[index - 1];

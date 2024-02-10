@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-
 namespace GeneticMwsat;
 
 public static class DimaxReader
@@ -24,6 +21,14 @@ public static class DimaxReader
 
                 formula.VariableCount = variableCount;
                 formula.ClauseCount = clausesCount;
+                
+                continue;
+            }
+
+            if (line.StartsWith('w'))
+            {
+                var weights = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).Skip(1).Select(int.Parse).ToArray();
+                formula.Weights = weights;
                 
                 continue;
             }
